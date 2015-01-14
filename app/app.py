@@ -17,8 +17,11 @@ def default():
     req_body = bottle.request.body.read()
     sig = hmac.new(WEBHOOK_KEY, msg=req_body, 
             digestmod=hashlib.sha1).hexdigest()
-    if "sha1=" + sig != sig_header:
-        return "bad signature\n"
+#    if "sha1=" + sig != sig_header:
+#        return "bad signature\n"
+    event = bottle.request.get_header("X-GitHub-Event")
+    if event != "push":
+        return bottle.HTTPResponse(status=501, body="not implemented")
     messages = [i.get("message") for i in json.loads(req_body).get("commits")]
     titles = []
     for message in messages:
