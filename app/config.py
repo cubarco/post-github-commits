@@ -1,6 +1,6 @@
 from common import * 
 
-social_plts = [
+SOCIAL_PLTS = [
             Twitter(
                 ckey="CONSUMER_KEY",
                 cscr="CONSUMER_SECRET",

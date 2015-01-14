@@ -32,7 +32,7 @@ def default():
             titles.append(title[0])
 
     for title in titles:
-        for social_plt in social_plts:
+        for social_plt in SOCIAL_PLTS:
             post_text = POST_TEXT % title
             social_plt.req(text=post_text)
 
