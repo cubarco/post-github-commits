@@ -4,7 +4,6 @@
 from config import *
 import json
 import re
-import urllib
 import hmac
 import hashlib
 import bottle
