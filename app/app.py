@@ -32,8 +32,8 @@ def default():
             titles.append(title[0])
 
     for title in titles:
+        post_text = (POST_TEXT % title).encode("utf8")
         for social_plt in SOCIAL_PLTS:
-            post_text = POST_TEXT % title
             social_plt.req(text=post_text)
 
     return "ok\n"
