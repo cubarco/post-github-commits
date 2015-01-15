@@ -1,5 +1,6 @@
 from common import * 
 
+# Required
 SOCIAL_PLTS = [
             Twitter(
                 ckey="CONSUMER_KEY",
@@ -10,8 +11,10 @@ SOCIAL_PLTS = [
                 ),
         ]
 
-POST_TEXT = "[TEST] I have a new post on my blog: \"%s\". (Site: https://url.to-your.site)"
-
+# Required
 WEBHOOK_KEY = "Github webhook key"
 
+POST_TEXT = "[TEST] I posted a new blog: \"%s\". (Site: https://url.to-your.site)"
+
+# Commit message example: "post Hello, world"
 COMMIT_REGX = r'^(?i)post (.*)'

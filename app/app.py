@@ -39,4 +39,4 @@ def default():
     return "ok\n"
 
 if __name__ == "__main__":
-    bottle.run(app=app, host='localhost', port=8080)
+    bottle.run(app=app, host='0.0.0.0', port=8080)
