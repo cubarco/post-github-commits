@@ -9,6 +9,10 @@ SOCIAL_PLTS = [
                 ascr="ACCESS_SECRET",
                 url="https://api.twitter.com/1.1/statuses/update.json",
                 ),
+            Facebook(
+                access_token="ACCESS_TOKEN",
+                url="https://graph.facebook.com/me/feed",
+                ),
         ]
 
 # Required
