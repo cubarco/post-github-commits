@@ -1,6 +1,7 @@
 import oauth2
 import urllib
 import urllib2
+import json
 
 class Twitter:
     def __init__(self, ckey, cscr, akey, ascr, url):
@@ -12,7 +13,18 @@ class Twitter:
     def req(self, text=None):
         post_body = urllib.urlencode({"status": text})
         resp, content = self.client.request(self.url, method="POST", body=post_body)
-        return content
+
+        error_json = json.loads(content).get("errors")
+        if error_json:
+            return {
+                    'status': 'failed',
+                    'name': "Twitter",
+                    'message': error_json[0].get("message"),
+                    'code': error_json[0].get("code")
+                   }
+        else:
+            return {'status': 'succeed', 'name': 'Twitter'}
+
 
 class Facebook:
     def __init__(self, access_token, url):
@@ -24,4 +36,14 @@ class Facebook:
         post_body = urllib.urlencode(self.post_body_dic)
         req = urllib2.Request(self.url, post_body)
         resp = urllib2.urlopen(req)
-        return resp.read()
+
+        error_json = json.loads(resp.read()).get("error")
+        if error_json:
+            return {
+                    'status': 'failed',
+                    'name': 'Facebook',
+                    'message': error_json.get("message"),
+                    'code': error_json.get('code')
+                   }
+        else:
+            return {'status': 'succeed', 'name': 'Facebook'}

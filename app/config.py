@@ -1,4 +1,4 @@
-from common import * 
+from socialplts import * 
 
 # Required
 SOCIAL_PLTS = [
