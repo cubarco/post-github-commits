@@ -21,7 +21,7 @@ class Twitter:
                     'name': "Twitter",
                     'message': error_json[0].get("message"),
                     'code': error_json[0].get("code")
-                   }
+            }
         else:
             return {'status': 'succeed', 'name': 'Twitter'}
 
@@ -44,6 +44,6 @@ class Facebook:
                     'name': 'Facebook',
                     'message': error_json.get("message"),
                     'code': error_json.get('code')
-                   }
+            }
         else:
             return {'status': 'succeed', 'name': 'Facebook'}
