@@ -11,12 +11,13 @@ from bottle import HTTPResponse
 
 app = application = bottle.Bottle()
 
+
 @app.post('/')
 def default():
     sig_header = bottle.request.get_header("X-Hub-Signature")
     req_body = bottle.request.body.read()
-    sig = hmac.new(WEBHOOK_KEY, msg=req_body, 
-            digestmod=hashlib.sha1).hexdigest()
+    sig = hmac.new(WEBHOOK_KEY, msg=req_body,
+                   digestmod=hashlib.sha1).hexdigest()
     if "sha1=" + sig != sig_header:
         return HTTPResponse(status=403, body="bad signature\n")
 
@@ -30,7 +31,7 @@ def default():
         title = re.findall(COMMIT_REGX, message)
         if len(title) > 0:
             titles.append(title[0])
-    
+
     if titles == []:
         return "No message matches.\n"
     else:
