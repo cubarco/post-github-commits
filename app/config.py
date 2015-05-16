@@ -1,4 +1,4 @@
-from socialplts import * 
+from socialplts import *
 
 # Required
 SOCIAL_PLTS = [
@@ -18,7 +18,7 @@ SOCIAL_PLTS = [
 # Required
 WEBHOOK_KEY = "Github webhook key"
 
-POST_TEXT = u"[TEST] I posted a new blog: \"%s\". (Site: https://url.to-your.site)"
+POST_TEXT = u"[TEST] A new blog post: \"%s\". (Site: https://url.to-your.site)"
 
 # Commit message example: "post Hello, world"
 COMMIT_REGX = r'^(?i)post (.*)'
