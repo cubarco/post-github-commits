@@ -3,6 +3,7 @@ import urllib
 import urllib2
 import json
 
+
 class Twitter:
     def __init__(self, ckey, cscr, akey, ascr, url):
         self.url = url
@@ -12,18 +13,20 @@ class Twitter:
 
     def req(self, text=None):
         post_body = urllib.urlencode({"status": text})
-        resp, content = self.client.request(self.url, method="POST", body=post_body)
-
-        error_json = json.loads(content).get("errors")
-        if error_json:
-            return {
-                    'status': 'failed',
-                    'name': "Twitter",
-                    'message': error_json[0].get("message"),
-                    'code': error_json[0].get("code")
-            }
+        try:
+            resp, content = self.client.request(self.url, method="POST",
+                                                body=post_body)
+        except:
+            pass
         else:
-            return {'status': 'succeed', 'name': 'Twitter'}
+            error_json = json.loads(content).get("errors")
+            if not error_json:
+                return {'status': 'succeed', 'name': 'Twitter'}
+
+        return {
+                'status': 'failed',
+                'name': "Twitter",
+        }
 
 
 class Facebook:
@@ -35,15 +38,16 @@ class Facebook:
         self.post_body_dic["message"] = text
         post_body = urllib.urlencode(self.post_body_dic)
         req = urllib2.Request(self.url, post_body)
-        resp = urllib2.urlopen(req)
-
-        error_json = json.loads(resp.read()).get("error")
-        if error_json:
-            return {
-                    'status': 'failed',
-                    'name': 'Facebook',
-                    'message': error_json.get("message"),
-                    'code': error_json.get('code')
-            }
+        try:
+            resp = urllib2.urlopen(req)
+        except:
+            pass
         else:
-            return {'status': 'succeed', 'name': 'Facebook'}
+            error_json = json.loads(resp.read()).get("error")
+            if not error_json:
+                return {'status': 'succeed', 'name': 'Facebook'}
+
+        return {
+                'status': 'failed',
+                'name': 'Facebook',
+        }
