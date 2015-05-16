@@ -7,7 +7,7 @@ import re
 import hmac
 import hashlib
 import bottle
-from bottle import HTTPResponse
+from bottle import HTTPResponse, response
 
 app = application = bottle.Bottle()
 
@@ -41,6 +41,7 @@ def default():
             for social_plt in SOCIAL_PLTS:
                 result = social_plt.req(text=post_text)
                 return_value.append(result)
+        response.content_type = 'application/json'
         return json.dumps(return_value)
 
 if __name__ == "__main__":
